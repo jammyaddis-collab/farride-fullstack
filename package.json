@@ -1,0 +1,24 @@
+{
+  "name": "afarride-fullstack",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AfarRide — Full-stack ride-hailing platform for Ethiopia (rider app, driver app, admin dashboard, realtime backend)",
+  "workspaces": [
+    "server",
+    "rider-app",
+    "driver-app",
+    "admin-dashboard"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace rider-app & npm run dev --workspace driver-app & npm run dev --workspace admin-dashboard & wait",
+    "dev:server": "npm run dev --workspace server",
+    "dev:rider": "npm run dev --workspace rider-app",
+    "dev:driver": "npm run dev --workspace driver-app",
+    "dev:admin": "npm run dev --workspace admin-dashboard",
+    "build": "npm run build --workspace rider-app && npm run build --workspace driver-app && npm run build --workspace admin-dashboard",
+    "start": "npm run start --workspace server"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

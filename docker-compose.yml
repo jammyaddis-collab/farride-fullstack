@@ -1,0 +1,34 @@
+services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - JWT_SECRET=${JWT_SECRET:-change-me}
+      - CHAPA_SECRET_KEY=${CHAPA_SECRET_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - NODE_ENV=production
+    volumes:
+      - api-data:/app/data
+    restart: unless-stopped
+
+  # Static builds of rider/driver/admin are served by the API itself in
+  # production (see server/src/index.js static mounts). For separate hosting:
+  #
+  # web-rider:
+  #   build: ./rider-app
+  #   ports: ["5173:80"]
+  #
+  # web-driver:
+  #   build: ./driver-app
+  #   ports: ["5174:80"]
+  #
+  # web-admin:
+  #   build: ./admin-dashboard
+  #   ports: ["5175:80"]
+
+volumes:
+  api-data:
